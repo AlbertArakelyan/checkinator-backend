@@ -6,6 +6,9 @@ import * as dotenv from 'dotenv';
 // DB
 import connectDB from './db.js';
 
+// Routers
+import userRouter from './routes/userRoutes.js';
+
 
 dotenv.config();
 
@@ -14,6 +17,9 @@ const app = express();
 // Global usages
 app.use(cors());
 app.use(bodyParser.json());
+
+// Routes
+app.use('/api/user', userRouter);
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello from Checkinator\'s powerful server</h1>');
