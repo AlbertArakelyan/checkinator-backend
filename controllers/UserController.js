@@ -199,6 +199,41 @@ class UserController extends Controller {
       });
     }
   }
+
+  static async getUsers(req, res) {
+    try {
+      // TODO add admin permission via middleware
+      const { skip = 0, limit = 10 } = req;
+
+      const users = await User.find({}, null, {
+        skip,
+        limit,
+      });
+
+      res.status(RECEIVED).json({
+        success: true,
+        data: {
+          data: users,
+          pageInfo: {
+            skip,
+            limit,
+            pageUrl: null,
+            nextPageUrl: null,
+            prevPageUrl: null,
+          },
+        },
+        message: userControllerMessages.usersReceived,
+        statusCode: RECEIVED,
+      });
+    } catch (error) {
+      super.catchError(error);
+      res.status(SERVER_ERROR).json({
+        success: false,
+        message: error.message || somethingWentWrong,
+        statusCode: SERVER_ERROR,
+      });
+    }
+  }
 }
 
 export default UserController;
