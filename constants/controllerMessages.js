@@ -7,4 +7,5 @@ export const userControllerMessages = {
   invalidEmailOrPassword: 'Invalid Email or Password.',
   emailNotVerified: 'Email is not verified, please check your email and verify.',
   loginSuccess: 'You have successfully been logged in.',
+  usersReceived: 'Users list received',
 }
