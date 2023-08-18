@@ -9,5 +9,6 @@ const userRouter = express.Router();
 userRouter.post('/sign-up', UserController.signUp);
 userRouter.post('/verify-email/:token', UserController.verifyEmail);
 userRouter.post('/sign-in', UserController.signIn);
+userRouter.get('/', UserController.getUsers);
 
 export default userRouter;
