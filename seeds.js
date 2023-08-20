@@ -141,9 +141,6 @@ const seedUsers = [
   },
 ];
 
-
-// $2a$10$HoLxlNlOz64qS.jMCmYmo.9EQq0tHr8Iz.7vGcdhcEtALyi4DaU2i - 12345678
-
 const seedDB = async () => {
   try {
     await User.deleteMany({});
