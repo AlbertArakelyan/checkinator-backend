@@ -203,20 +203,26 @@ class UserController extends Controller {
   static async getUsers(req, res) {
     try {
       // TODO add admin permission via middleware
-      const { skip = 0, limit = 10 } = req;
+      const { skip = 0, limit = 10 } = req.query;
 
       const users = await User.find({}, null, {
         skip,
         limit,
       });
 
+      const totalUsers = await User.countDocuments();
+      const totalPages = Math.ceil(totalUsers / limit);
+
       res.status(RECEIVED).json({
         success: true,
         data: {
           data: users,
           pageInfo: {
+            page: Math.floor(skip / limit) + 1,
             skip,
             limit,
+            total: totalUsers,
+            pages: totalPages,
             pageUrl: null,
             nextPageUrl: null,
             prevPageUrl: null,
