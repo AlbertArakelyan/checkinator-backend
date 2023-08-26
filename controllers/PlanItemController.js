@@ -111,7 +111,7 @@ class PlanItemController extends Controller {
 
       res.status(RECEIVED).json({
         success: true,
-        data: planItem,
+        data: { ...planItem._doc, name },
         message: planItemControllerMessages.updated,
         statusCode: RECEIVED,
       });

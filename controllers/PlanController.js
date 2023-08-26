@@ -58,11 +58,12 @@ class PlanController extends Controller {
         });
       }
 
-      const plan = await Plan.create({ name, price, planItems });
+      let plan = await Plan.create({ name, price, planItems });
+      plan = await plan.populate('planItems');
 
       res.status(CREATED).json({
         success: true,
-        data: plan,
+        data: plan, // TODO: send already updated data
         message: planControllerMessages.created,
         statusCode: CREATED,
       });
