@@ -14,7 +14,7 @@ import {
 class PlanController extends Controller {
   static async create(req, res) {
     try {
-      const { name, price, planItems } = req.body;
+      const { name, price, planItems, color } = req.body;
 
       if (!name || !price || !planItems?.length) {
         let errorCounter = 0;
@@ -58,7 +58,7 @@ class PlanController extends Controller {
         });
       }
 
-      let plan = await Plan.create({ name, price, planItems });
+      let plan = await Plan.create({ name, price, planItems, color });
       plan = await plan.populate('planItems');
 
       res.status(CREATED).json({
@@ -122,9 +122,10 @@ class PlanController extends Controller {
   static async update(req, res) {
     try {
       const { id } = req.params;
-      const { name, price, planItems } = req.body;
+      const { name, price, planItems, color } = req.body;
 
-      const plan = await Plan.findByIdAndUpdate(id, { name, price, planItems });
+      let plan = await Plan.findByIdAndUpdate(id, { name, price, planItems, color });
+      plan = await plan.populate('planItems');
 
       res.status(RECEIVED).json({
         success: true,

@@ -16,6 +16,10 @@ const planSchema = new mongoose.Schema({
     required: true,
     ref: 'PlanItem',
   },
+  color: {
+    type: String,
+    required: true,
+  },
 }, {
   timestamps: {
     createdAt: 'created_at',

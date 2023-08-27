@@ -16,7 +16,6 @@ class UserMiddleware {
   static async auth(req, res, next) {
     try {
       const token = req.headers.authorization.split(' ')[1];
-      console.log(11111, token);
 
       jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
