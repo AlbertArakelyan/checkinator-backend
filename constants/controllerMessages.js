@@ -29,4 +29,10 @@ export const planControllerMessages = {
   atLeaseOneFieldRequired: 'At least one field is required.',
   deleted: 'Plan has been deleted',
   notFound: 'Plan not found',
-} ;
+};
+
+export const activeSubscriptionControllerMessages = {
+  checkoutSessionCreated: 'Checkout session has been created.',
+  created: 'Active subscription has been created.',
+  alreadyExists: 'Active subscription with that plan already exists.',
+};

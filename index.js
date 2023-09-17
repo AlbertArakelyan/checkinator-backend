@@ -10,6 +10,7 @@ import connectDB from './db.js';
 import userRouter from './routes/userRoutes.js';
 import planItemRouter from './routes/planItemRoutes.js';
 import planRouter from './routes/planRoutes.js';
+import activeSubscriptionRouter from './routes/activeSubscriptionRoutes.js';
 
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use('/api/user', userRouter);
 app.use('/api/plan-item', planItemRouter);
 app.use('/api/plan', planRouter);
+app.use('/api/active-subscription', activeSubscriptionRouter);
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello from Checkinator\'s powerful server</h1>');
