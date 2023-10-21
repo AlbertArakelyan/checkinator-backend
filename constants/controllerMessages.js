@@ -35,4 +35,6 @@ export const activeSubscriptionControllerMessages = {
   checkoutSessionCreated: 'Checkout session has been created.',
   created: 'Active subscription has been created.',
   alreadyExists: 'Active subscription with that plan already exists.',
+  received: 'Active subscriptions received.',
+  notFound: 'Active subscription not found.',
 };

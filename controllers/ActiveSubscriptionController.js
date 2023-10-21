@@ -10,6 +10,7 @@ import {
   RECEIVED,
   CREATED,
   BAD_REQUEST,
+  NOT_FOUND,
   activeSubscriptionControllerMessages,
   somethingWentWrong,
 } from '../constants/index.js';
@@ -80,6 +81,38 @@ class ActiveSubscriptionController extends Controller {
         data: activeSubscription,
         message: activeSubscriptionControllerMessages.created,
         statusCode: CREATED,
+      });
+    } catch (error) {
+      super.catchError(error);
+      res.status(SERVER_ERROR).json({
+        success: false,
+        message: error.message || somethingWentWrong,
+        statusCode: SERVER_ERROR,
+      });
+    }
+  }
+
+  static async getCurrentActiveSubscription(req, res) {
+    try {
+      const userId = req.user.id;
+
+      // TODO: add validation for user existence
+
+      const activeSubscription = await ActiveSubscription.findOne({ userId });
+
+      if (!activeSubscription) {
+        return res.status(NOT_FOUND).json({
+          success: false,
+          message: activeSubscriptionControllerMessages.notFound,
+          statusCode: NOT_FOUND,
+        });
+      }
+
+      res.status(RECEIVED).json({
+        success: true,
+        data: activeSubscription,
+        message: activeSubscriptionControllerMessages.received,
+        statusCode: RECEIVED,
       });
     } catch (error) {
       super.catchError(error);
